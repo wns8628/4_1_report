@@ -4,22 +4,14 @@
  <body>
  <center>
    <script>
-    var target = new Array( new Array(3), new Array(4) );
-        target = [ [ '4', '3', '2', '1' ],[ null ],[ null ] ];
+    var plate = new Array( new Array(3), new Array(4) );
+        plate = [ [ '4', '3', '2', '1' ],[ null ],[ null ] ];
 
+    document.write("<br>처음 하노이탑!<br><br>");
 
- document.write("<br>처음 하노이탑!<br><br>");
-  hanoi_view();
-  main();
-  // hanoi_tower(n, from,tmp,to);
-  // hanoi_carry(from, to);
-
-
-  function main(){
+    hanoi_view();
     hanoi_tower(4, 'A', 'B', 'C');
    	hanoi_view();
-   	return 0;
-   }
 
    function hanoi_tower(n, from,  tmp, to) {
    	if (n == 1) {
@@ -37,28 +29,58 @@
    }
 
 
-  function hanoi_carry(from, to){
-   var i, first, last, check;
-   	((from == 'A') ? (first = 0) : (from == 'B') ? (first = 1) : (first = 2));
-   	((to == 'A') ? (last = 0) : (to == 'B') ? (last = 1) : (last = 2));
-   	for (i = 0; ; i++) {
-       		if (target[first][i] == null) { check = i - 1;	break; }
-  	}
-   	for (i = 0; i<4; i++) {
-   		if (target[last][i] == null) {
-   			target[last][i] = target[first][check];
-   			target[first][check] = null;
-   			break;
-   		}
-   	}
-   }
+  // function hanoi_carry(from, to){
+  //  var i, first, last, check;
+  //  	((from == 'A') ? (first = 0) : (from == 'B') ? (first = 1) : (first = 2));
+  //  	((to == 'A') ? (last = 0) : (to == 'B') ? (last = 1) : (last = 2));
+  //  	for (i = 0; ; i++) {
+  //      		if (plate[first][i] == null) { check = i - 1;	break; }
+  // 	}
+  //  	for (i = 0; i<4; i++) {
+  //  		if (plate[last][i] == null) {
+  //  			plate[last][i] = plate[first][check];
+  //  			plate[first][check] = null;
+  //  			break;
+  //  		}
+  //  	}
+  //  }
+
+   function hanoi_carry(from, to){
+    var i, first, last, check;
+      if(from == 'A'){
+        first = 0
+      }else if(from == 'B'){
+        first = 1
+      }else {
+        first = 2
+      }
+
+      if(to == 'A'){
+        last = 0
+      }else if(to == 'B'){
+        last = 1
+      }else {
+        last = 2
+      }
+
+    	for (i = 0; ; i++) {
+        		if (plate[first][i] == null) { check = i - 1;	break; }
+   	      }
+    	for (i = 0; i<4; i++) {
+    		if (plate[last][i] == null) {
+    			plate[last][i] = plate[first][check];
+    			plate[first][check] = null;
+    			break;
+    		}
+    	}
+    }
 
 
   function hanoi_view() {
    	var i, j;
    	for (i = 3; i >= 0; i--) {
    		for (j = 0; j < 3; j++) {
-   			if (target[j][i] != null)	document.write("&nbsp;&nbsp; &nbsp;"+target[j][i]+"&nbsp; &nbsp;");
+   			if (plate[j][i] != null)	document.write("&nbsp;&nbsp; &nbsp;"+plate[j][i]+"&nbsp; &nbsp;");
    			else document.write("&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;");
    		}
    		document.write("<br>");
