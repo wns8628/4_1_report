@@ -1,0 +1,29 @@
+<!-- 최대값찾기 과제 이산수학 -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+      <script type="text/javascript">
+
+
+        var s = new Array(100,2,5,7,11,3,50,20,30);
+        document.write("처음설정한 배열 : [ "+ s + " ]<br><br>"); //배열출력
+        var maxvalue = max(s);
+        document.write("최대값 : "+maxvalue); //결과값 출력
+
+        //최대값구하는 함수
+        function max(s) {
+          var large = s[0];
+          for(var i = 1; i < s.length; i++){
+               if(large < s[i]){
+                   large = s[i];
+               }
+          }
+          return large;
+        }
+      </script>
+  </body>
+</html>
