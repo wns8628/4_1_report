@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+     var n = 4;
+
+     document.write("순환 n 설정 : " + n);
+
+      function facto(n){
+        if(n==1){
+           return 1
+          } else {
+           return n * facto(n-1);
+        }
+      }
+
+
+      var result = facto(n);
+
+      document.write("<br><br> 계산 값 : " +  result);
+
+// --------------
+
+document.write("<br><br>------------<br> 반복 n 설정 : " + n);
+
+ function facto_re(n){
+   var i = 1;
+   for(var k=n; k>0; k--){
+        i = i*k;
+   }
+   return i;
+ }
+
+ var result_re = facto(n);
+
+ document.write("<br><br> 계산 값 : " +  result_re);
+
+
+
+    </script>
+  </body>
+</html>

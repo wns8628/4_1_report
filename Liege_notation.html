@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h3>후위표기법 과제 12120084 김세준</h3>
+
+
+    <input id="inputid"type="text" name="" value="" placeholder="식을 적어주세요 예) A+B*C">
+    <input type="button" name="" value="확인" onclick="Liege_notation()">
+    </br>
+    </br>
+
+    <p id="demo">결과값 : </p>
+
+    <script type="text/javascript">
+
+      function Stack(capacity){
+          this.capacity = capacity+1;
+          this.buffer = new Array(this.capacity);
+          this.topIndex = -1;
+      };
+
+      Stack.prototype.push = function(obj){
+              this.topIndex++;
+              this.buffer[this.topIndex] = obj;
+              return true;
+          return false;
+      };
+      Stack.prototype.pop = function(){
+              ret = this.buffer[this.topIndex];
+              this.buffer[this.topIndex] = undefined;
+              this.topIndex--;
+              return ret;
+          return null;
+      };
+
+    function Liege_notation()
+    {
+      var stack = new Stack(8);
+      var input = document.getElementById("inputid").value;
+      var put = new Array(3);
+      put = input.split(""); //입력요소분리
+
+    	var i = 0;
+    	var top = -1;
+    	var temp;
+
+    	for ( i ; i < put.length ; i++){
+    		if (put[i] == '+' || put[i] == '-' || put[i] == '*' || put[i] == '/'){
+    			switch (put[i]){
+    			case '+': case '-':
+    			{
+    				if (top == -1){
+    					stack.push(put[i]);
+    					top++;
+    					break;
+    				}
+    				while (top != -1){
+    					var temp = stack.pop();
+    					top--;
+    					document.getElementById("demo").innerHTML += temp;
+    				}
+    				stack.push(put[i]);
+    				top++;
+    				break;
+    			}
+    			case '*': case '/':
+    			{
+    				if (top == -1){
+    					stack.push(put[i]);
+    					top++;
+    					break;
+    				}
+    				var temp = stack.pop();
+    				top--;
+    				if ((temp == '*') || (temp == '/')){
+    					document.getElementById("demo").innerHTML +=  temp ;
+    				}
+    				else{
+    					stack.push( temp );
+    					top++;
+    				}
+    				stack.push( put[i] );
+    				top++;
+    				break;
+    			}
+    			}
+    		}
+    		else
+    		 document.getElementById("demo").innerHTML +=  put[i] ;
+    	}
+    	for (var i = 0; i <= top; i++ ){
+        document.getElementById("demo").innerHTML +=  stack.pop() ;
+    	}
+    }
+
+
+    </script>
+  </body>
+</html>
