@@ -7,12 +7,10 @@
   <body>
     <h3>후위표기법 과제 12120084 김세준</h3>
 
-
-    <input id="inputid"type="text" name="" value="" placeholder="식을 적어주세요 예) A+B*C">
+    <input id="inputid"type="text" name="" value="" placeholder="식을 적어주세요 예) 1+2*3">
     <input type="button" name="" value="확인" onclick="Liege_notation()">
     </br>
     </br>
-
     <p id="demo">결과값 : </p>
 
     <script type="text/javascript">
@@ -22,7 +20,6 @@
           this.buffer = new Array(this.capacity);
           this.topIndex = -1;
       };
-
       Stack.prototype.push = function(obj){
               this.topIndex++;
               this.buffer[this.topIndex] = obj;
@@ -47,6 +44,7 @@
     	var i = 0;
     	var top = -1;
     	var temp;
+
 
     	for ( i ; i < put.length ; i++){
     		if (put[i] == '+' || put[i] == '-' || put[i] == '*' || put[i] == '/'){
@@ -93,10 +91,50 @@
     		 document.getElementById("demo").innerHTML +=  put[i] ;
     	}
     	for (var i = 0; i <= top; i++ ){
-        document.getElementById("demo").innerHTML +=  stack.pop() ;
+        document.getElementById("demo").innerHTML +=  stack.pop();
     	}
     }
 
+
+// exp[] 는 후위 표기법으로 된 수식
+function calcul(){
+    var op1, op2, value, i;
+    var exp = new Array('1','2','3','*','+');
+    var len = new Array( '10', '+' , '2', '*' , '5');
+    var ch;
+
+    // StackType s;
+    var s = new Stack(5);
+    // init(&s);
+    for (i = 0; i < len.length; i++) {
+        ch = exp[i];
+        // ch가 피연산자일 경우. char형태의 값으로 들어오기 때문에 char '0' = 48을 가짐.
+        // 실제 숫자값으로 변경하기 위해 - '0'을 해준다.
+        if (ch != '+' && ch != '-' && ch != '*' && ch != '/'){
+            value = ch - '0';
+            s.push(value);
+            continue ;
+          }
+
+        op2 = s.pop();
+        op1 = s.pop();
+
+        switch (ch) {
+            case '+': value = op1 + op2; break;
+            case '-': value = op1 - op2; break;
+            case '*': value = op1 * op2; break;
+            case '/': value = op1 / op2; break;
+            default: exit(1); break;
+        }
+        s.push(value);
+    }
+    return s.pop();
+}
+//
+
+    var a = eval();
+
+    document.write(a);
 
     </script>
   </body>
