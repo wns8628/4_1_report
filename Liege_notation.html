@@ -11,7 +11,11 @@
     <input type="button" name="" value="확인" onclick="Liege_notation()">
     </br>
     </br>
-    <p id="demo">결과값 : </p>
+    ▼ 결과값 ▼
+    &nbsp;&nbsp;<strong><div id="demo"></div></strong> <br>
+
+    ▼ 계산값 ▼
+   &nbsp;&nbsp;<strong><div id="result"></div></strong>
 
     <script type="text/javascript">
 
@@ -93,49 +97,53 @@
     	for (var i = 0; i <= top; i++ ){
         document.getElementById("demo").innerHTML +=  stack.pop();
     	}
-    }
+
+      var calcul_result = document.getElementById("demo").innerHTML
+      var ba_result = calcul_result.split("");
+
+      // 계산함수호출
+      var f_result= calcul(ba_result);
+
+      document.getElementById("result").innerHTML = f_result;
+  }
 
 
-// exp[] 는 후위 표기법으로 된 수식
-function calcul(){
-    var op1, op2, value, i;
-    var exp = new Array('1','2','3','*','+');
-    var len = new Array( '10', '+' , '2', '*' , '5');
+
+//후위로된것 받아서 계산하는 함수 입니다.----------------------------------------
+function calcul(ba_result){
+    var para1, para2
+    var value
+    var i
+    var calcul_exp = new Array();
+    calcul_exp = ba_result;
+    // var len = new Array( '10', '+' , '2', '*' , '5');
     var ch;
 
-    // StackType s;
     var s = new Stack(5);
-    // init(&s);
-    for (i = 0; i < len.length; i++) {
-        ch = exp[i];
-        // ch가 피연산자일 경우. char형태의 값으로 들어오기 때문에 char '0' = 48을 가짐.
-        // 실제 숫자값으로 변경하기 위해 - '0'을 해준다.
+
+    for (i = 0; i < calcul_exp.length; i++) {
+        ch = calcul_exp[i];
+        // 문자를 숫자로 바꿔줌 '0을빼주면 됨'
         if (ch != '+' && ch != '-' && ch != '*' && ch != '/'){
             value = ch - '0';
             s.push(value);
             continue ;
           }
-
-        op2 = s.pop();
-        op1 = s.pop();
+        para2 = s.pop();
+        para1 = s.pop();
 
         switch (ch) {
-            case '+': value = op1 + op2; break;
-            case '-': value = op1 - op2; break;
-            case '*': value = op1 * op2; break;
-            case '/': value = op1 / op2; break;
+            case '+': value = para1 + para2; break;
+            case '-': value = para1 - para2; break;
+            case '*': value = para1 * para2; break;
+            case '/': value = para1 / para2; break;
             default: exit(1); break;
         }
         s.push(value);
     }
     return s.pop();
 }
-//
-
-    var a = eval();
-
-    document.write(a);
-
+//-----------------------------
     </script>
   </body>
 </html>
